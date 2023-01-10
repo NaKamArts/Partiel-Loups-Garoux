@@ -6,8 +6,8 @@
    
     
 			<p>
-       <label for="nom">Login*</label>
-       <input id="login" type="text" name="login"  size="30" maxlength="45">
+       <label for="nom">Pseudo*</label>
+       <input id="pseudo" type="text" name="pseudo"  size="30" maxlength="45">
       </p>
 			<p>
 				<label for="mdp">Mot de passe*</label>

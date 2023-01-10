@@ -1,26 +1,27 @@
 <?php
 
 class Carte {
-    private int $id;
-    private string $name;
-    private string $description;
-    private string $image;
+    private int $carte_id;
+    private string $nom;
+    private ?string $description;
+    private ?string $image;
+    private ?string $power;
 
 
     public function getId() {
-        return $this->id;
+        return $this->carte_id;
     }
 
     public function setId($id) {
-        $this->id = $id;
+        $this->carte_id = $id;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getNom() {
+        return $this->nom;
     }
 
-    public function setName($name) {
-        $this->name = $name;
+    public function setNom($nom) {
+        $this->nom = $nom;
     }
 
     public function getDescription() {
@@ -31,5 +32,37 @@ class Carte {
         $this->description = $description;
     }
 
-    
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
+    public function getPower(){
+        return $this->power;
+    }
+
+    public function setPower(){
+        $this->power = $power;
+    }
+
+    public static function getAllCartes() {
+        $sql = "SELECT * FROM carte";
+		$rs = PdoGsb::get_monPdo()->query($sql);
+        $rs->setFetchMode(PDO::FETCH_CLASS, 'Carte');
+        $result = $rs->fetchAll();
+		return $result;
+    }
+
+    public static function getCarteById($id) {
+        $sql = "SELECT * FROM carte WHERE carte_id = :id";
+		$rs = PdoGsb::get_monPdo()->prepare($sql);
+        $rs->setFetchMode(PDO::FETCH_CLASS, 'Carte');
+        $rs->bindParam('id', $id);
+        $rs->execute();
+        $result = $rs->fetch();
+		return $result;
+    }
 }

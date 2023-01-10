@@ -1,18 +1,19 @@
 <?php
 
 class Joueur {
-    private int $id;
+    private int $joueur_id;
     private string $pseudo;
     private bool $estVivant;
     private bool $estMaire;
     private bool $estAmoureux;
+    private Carte $carte;
 
     public function getId() {
-        return $this->id;
+        return $this->joueur_id;
     }
 
     public function setId($id) {
-        $this->id = $id;
+        $this->joueur_id = $id;
     }
 
     public function getPseudo() {
@@ -45,5 +46,23 @@ class Joueur {
 
     public function setEstAmoureux($estAmoureux) {
         $this->estAmoureux = $estAmoureux;
+    }
+
+    public function getCarte() {
+        return $this->carte;
+    }
+
+    public function setCarte($carte) {
+        $this->carte = $carte;
+    }
+
+    public static function getJoueurById($id) {
+        $sql = "SELECT * FROM joueur WHERE joueur_id = :id";
+		$rs = PdoGsb::get_monPdo()->prepare($sql);
+        $rs->setFetchMode(PDO::FETCH_CLASS, 'Joueur');
+        $rs->bindParam('id', $id);
+        $rs->execute();
+        $result = $rs->fetch();
+		return $result;
     }
 }
