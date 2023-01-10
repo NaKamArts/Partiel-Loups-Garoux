@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Joueur(
    estVivant BIT,
    estMaire BIT,
    estAmoureux BIT,
-   carte_id INT NOT NULL,
+   carte_id INT,
    PRIMARY KEY(joueur_id),
    FOREIGN KEY(carte_id) REFERENCES Carte(carte_id)
 );
