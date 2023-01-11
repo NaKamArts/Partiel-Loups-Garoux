@@ -44,7 +44,7 @@ class Carte {
         return $this->power;
     }
 
-    public function setPower(){
+    public function setPower($power){
         $this->power = $power;
     }
 
